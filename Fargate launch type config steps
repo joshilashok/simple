@@ -1,0 +1,12 @@
+https://sakyasumedh.medium.com/setup-application-load-balancer-and-point-to-ecs-deploy-to-aws-ecs-fargate-with-load-balancer-4b5f6785e8f
+
+Steps to configure completely:
+1. Create and Push the Dockerfile to ECR Repo
+2. Create Task definition with the docker image pushed and mention the port as 3000 in container port
+3. create cluster and then service
+4. create target group with type IP Address and in Step 2 remove the IP from field : "Specify IPs and define ports"
+5. Include the target group in ALB creation and mention the listener port as 80
+6. After above all steps if still the new task created are not registered in target group :
+  We need to create the service once again by deleting the previous one since new created LB would not be registered auto in service
+  so just delete the service from cluster and create new one with Load Balancer registered from Load balancing section.
+  After adding  the load balancer , try updating the task definition with quick service update and increase the task definition to see if new task auto registered in LB
