@@ -4,8 +4,8 @@ phases:
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
-      - aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 715841355602.dkr.ecr.ap-south-1.amazonaws.com
-      - REPOSITORY_URI=715841355602.dkr.ecr.ap-south-1.amazonaws.com/sample-node-app
+      - aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 436421610585.dkr.ecr.ap-south-1.amazonaws.com
+      - REPOSITORY_URI=436421610585.dkr.ecr.ap-south-1.amazonaws.com/sample-node-app
       - IMAGE_TAG=$CODEBUILD_RESOLVED_SOURCE_VERSION
   build:
     commands:
@@ -18,3 +18,4 @@ phases:
       - printf '[{"name":"prod-container","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
 artifacts:
   files: imagedefinitions.json
+
