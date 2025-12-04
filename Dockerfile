@@ -1,20 +1,20 @@
-# Use the official Node.js image from Docker Hub
-FROM node:16-slim
+# Use the official Node.js image from AWS Public ECR (no rate limits)
+FROM public.ecr.aws/docker/library/node:18-slim
 
 # Set the working directory inside the container
 WORKDIR /app
 
-# Copy the package.json and package-lock.json first to install dependencies
+# Copy package files first
 COPY package*.json ./
 
 # Install dependencies
 RUN npm install
 
-# Copy the entire application to the container
+# Copy the rest of the app
 COPY . .
 
 # Expose port 3000 for the application
 EXPOSE 3000
 
-# Run the app
+# Start the app
 CMD ["node", "app.js"]
